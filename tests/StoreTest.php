@@ -82,6 +82,20 @@
             $this->assertEquals($store1, $result);
         }
 
+        function test_findByName()
+        {
+            $store_name1 = "Discount Shoes";
+            $store1 = new Store($store_name1);
+            $store1->save();
+            $store_name2 = "Exquisite Footwear";
+            $store2 = new Store($store_name2);
+            $store2->save();
+            $search_name = $store2->getStoreName();
 
+            $result = Store::findByName($search_name);
+
+            $this->assertEquals($store2, $result);
+
+        }
     }
 ?>
