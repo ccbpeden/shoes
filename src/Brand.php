@@ -6,8 +6,12 @@
 
         function __construct($brand_name, $id = null)
         {
-            $this->setBrandName($brand_name);
-            $this->setId($id);
+            $valid = Brand::validate($brand_name);
+            if ($valid)
+            {
+                $this->setBrandName($brand_name);
+                $this->setId($id);
+            }
         }
 
         function getBrandName()
@@ -17,7 +21,11 @@
 
         function setBrandName($brand_name)
         {
-            $this->brand_name = $brand_name;
+            $valid = Brand::validate($brand_name);
+            if ($valid)
+            {
+                $this->brand_name = $brand_name;
+            }
         }
 
         function getId()
@@ -32,6 +40,7 @@
 
         function save()
         {
+            $this->sanitize();
             $GLOBALS['DB']->exec("INSERT INTO brands (brand_name) VALUES ('{$this->getBrandName()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
@@ -45,6 +54,7 @@
                 $brand_name = $brand['brand_name'];
                 $brand_id = $brand['id'];
                 $new_brand = new Brand($brand_name, $brand_id);
+                $new_brand->desanitize();
                 array_push($all_brands, $new_brand);
             }
             return $all_brands;
@@ -63,6 +73,16 @@
                 $valid = true;
             }
             return $valid;
+        }
+
+        function sanitize()
+        {
+            $this->brand_name = htmlspecialchars(addslashes(trim($this->brand_name)));
+        }
+
+        function desanitize()
+        {
+            $this->brand_name = htmlspecialchars_decode(stripslashes($this->brand_name));
         }
     }
 ?>

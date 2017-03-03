@@ -14,8 +14,9 @@ A program that allows a hypothetical shoe store chain magnate to keep track of r
 | program successfully saves object data to sql database | $new_brand->save(); $id = $new_brand->getId(); |  $id = 142 | because an id is not provided locally, any actual id number is provided by the database, proving that the object has been successfully saved.
 | Program is able to delete brands collectively |Brand::deleteAll(); $result = Brand::getAll(); | $result = [] | Assuming previous code, if the deleteAll() method weren't working, a getAll() would return the previously created brand.
 | Program successfully validates Input | Brand::validate(null); Brand::validate("cake"); | false, true | because default validation state set to false, validation will only set to true if conditions passed.
-| Program validates input before instantiating |
-| program successfully sanitizes input before instantiation
+| Program validates input before instantiating | $new_brand = new Brand(""); $new_brand->getBrandName() | error | unable to instantiate because invalid input |
+| program successfully sanitizes input before saving to DB | "G&ido'$" | "G&amp;ido\'$" | input contains both irregular characters and quotes |
+| program successfully desanitizes text upon extraction from DB |  "G&amp;ido\'$" | "G&ido'$" | input contains both irregular characters and quotes |
 | Program able to get and display both all and singular instances of class objects |  |  |
 | Program successfully creates relationships between brands and stores in join table |
 | Program able to find and display all stores where a brand of shoes is carried |  |  |

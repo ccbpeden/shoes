@@ -50,9 +50,22 @@
             $result1 = Brand::validate($brand_name1);
             $result2 = Brand::validate($brand_name2);
             $result = array($result1, $result2);
-            var_dump($result);
 
             $this->assertEquals([true, false], $result);
+        }
+
+        function test_SanitizeDesanitize()
+        {
+            $brand_name = "G&ido'$";
+            $new_brand = new Brand($brand_name);
+            $new_brand->sanitize();
+            $result1 = $new_brand->getBrandName();
+
+            $new_brand->desanitize();
+            $result2 = $new_brand->getBrandName();
+            $result = array($result1, $result2);
+
+            $this->assertEquals(["G&amp;ido\'$","G&ido'$"], $result);
         }
     }
 ?>
