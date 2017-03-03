@@ -10,7 +10,7 @@ A program that allows a hypothetical shoe store chain magnate to keep track of r
 
 |Behavior|Input|Output|Justification|
 |--------|-----|------|-------|
-| Program successfully instantiates Class Objects, getters work correctly | $new_brand |  | 
+| Program successfully instantiates Class Objects, getters work correctly | $new_brand->getBrandName() | "Guido" | A property must be part of a successfully instantiated object to be gotten by a getter.
 | Program successfully validates Input before instantiation |  |  | because default validation state set to false, validation will only set to true if conditions passed.
 | program successfully sanitizes input before instantiation
 | program successfully saves object data to sql database
