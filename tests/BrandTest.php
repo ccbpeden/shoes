@@ -81,7 +81,6 @@
             $result = Brand::findById($search_id);
 
             $this->assertEquals($brand1, $result);
-
         }
 
         function test_findByName()

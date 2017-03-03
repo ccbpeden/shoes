@@ -66,5 +66,22 @@
 
             $this->assertEquals(["Bob\'s Discount Shoes &amp; More Emporium","Bob's Discount Shoes & More Emporium"], $result);
         }
+
+        function test_findById()
+        {
+            $store_name1 = "Discount Shoes";
+            $store1 = new Store($store_name1);
+            $store1->save();
+            $store_name2 = "Exquisite Footwear";
+            $store2 = new Store($store_name2);
+            $store2->save();
+            $search_id = $store1->getId();
+
+            $result = Store::findById($search_id);
+
+            $this->assertEquals($store1, $result);
+        }
+
+
     }
 ?>
