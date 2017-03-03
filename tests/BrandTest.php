@@ -120,5 +120,40 @@
 
             $this->assertEquals([$store1, $store3], $result);
         }
+
+        function test_delete()
+        {
+            $brand_name1 = "Guido";
+            $brand1 = new Brand($brand_name1);
+            $brand1->save();
+            $brand_name2 = "Abliblas";
+            $brand2 = new Brand($brand_name2);
+            $brand2->save();
+
+            $brand1->delete();
+            $result=Brand::getAll();
+
+            $this->assertEquals([$brand2], $result);
+        }
+
+        function test_deleteinjointable()
+        {
+            $brand_name1 = "Guido";
+            $brand1 = new Brand($brand_name1);
+            $brand1->save();
+            $brand_name2 = "Abliblas";
+            $brand2 = new Brand($brand_name2);
+            $brand2->save();
+            $store_name1 = "Discount Shoes";
+            $store1 = new Store($store_name1);
+            $store1->save();
+            $store1->addBrand($brand1->getId());
+            $store1->addBrand($brand2->getId());
+
+            $brand1->delete();
+            $result=$store1->getBrands();
+
+            $this->assertEquals([$brand2], $result);
+        }
     }
 ?>

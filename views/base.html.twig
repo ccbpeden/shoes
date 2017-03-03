@@ -9,9 +9,17 @@
     <body>
         <div class="container">
             {% block header%}
-            <h2>Epicodus Shoe Store Management System</h2>
-            <a href="/stores">Examine current stores</a>
-            <a href="/brands">Examine current brands</a>
+            <div class="center">
+                <h2>Epicodus Shoe Store Management System</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="/stores">Examine current stores</a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/brands">Examine current brands</a>
+                </div>
+            </div>
             {%endblock%}
             {%block page%}
             {%endblock%}

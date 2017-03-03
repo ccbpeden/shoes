@@ -12,6 +12,7 @@
                 $this->setStoreName($store_name);
                 $this->setId($id);
             }
+            return $valid;
         }
 
         function getStoreName()
@@ -26,6 +27,7 @@
             {
                 $this->store_name = $store_name;
             }
+            return $valid;
         }
 
         function getId()

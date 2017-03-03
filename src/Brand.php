@@ -12,6 +12,7 @@
                 $this->setBrandName($brand_name);
                 $this->setId($id);
             }
+            return $valid;
         }
 
         function getBrandName()
@@ -26,6 +27,7 @@
             {
                 $this->brand_name = $brand_name;
             }
+            return $valid;
         }
 
         function getId()
@@ -129,6 +131,12 @@
                 array_push($output_stores, $new_store);
             }
             return $output_stores;
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM brands WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores WHERE brand_id = {$this->getId()};");
         }
 
     }

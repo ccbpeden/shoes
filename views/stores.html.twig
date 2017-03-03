@@ -1,0 +1,28 @@
+{%extends 'base.html.twig'%}
+{% block page %}
+    <div class="row">
+        <div class="col-md-6">
+            {% if stores is not empty %}
+            <h2>Select One of Your Current Stores:</h2>
+            <ul>
+                {% for store in stores %}
+                <li><h4><a href="/store/{{store.getId}}">{{store.getStoreName}}</a></h4><br></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <h4>You do not have any current stores!</h4>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <h3>Add a Store</h3>
+                <form class="" action="/addstore" method="post">
+                    <label for="store_name">Store Name</label>
+                    <input type="store_name" name="store_name" value="">
+                    <button class="btn" type="submit" name="button">Add Store</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}

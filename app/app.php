@@ -9,7 +9,7 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
-    $server = 'mysql:host=localhost:8889;dbname=library';
+    $server = 'mysql:host=localhost:8889;dbname=shoes';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -31,8 +31,28 @@
 
     $app->get("/stores", function () use ($app) {
         $all_stores = Store::getAll();
-        return $app['twig']->render('store.html.twig', array('stores'=>$all_stores));
+        return $app['twig']->render('stores.html.twig', array('stores'=>$all_stores));
     });
+
+    $app->post("/addstore", function () use ($app) {
+        $store_name = $_POST['store_name'];
+        $new_store = new Store($store_name);
+        $success = $new_store->save();
+        return $app->redirect("/stores");
+    });
+
+    $app->get("/brands", function () use ($app) {
+        $all_brands = Brand::getAll();
+        return $app['twig']->render('brands.html.twig', array('brands'=>$all_brands));
+    });
+
+    $app->post("/addbrand", function () use ($app) {
+        $brand_name = $_POST['brand_name'];
+        $new_brand = new Brand($brand_name);
+        $success = $new_brand->save();
+        return $app->redirect("/brands");
+    });
+
 
     return $app;
 ?>

@@ -1,0 +1,28 @@
+{%extends 'base.html.twig'%}
+{% block page %}
+    <div class="row">
+        <div class="col-md-6">
+            {% if brands is not empty %}
+            <h2>Select a Current Carried Brands:</h2>
+            <ul>
+                {% for brand in brands %}
+                <li><h4><a href="/brand/{{brand.getId}}">{{brand.getBrandName}}</a></h4><br></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <h4>You do not currently carry any brands!</h4>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <h3>Add a Brand</h3>
+                <form class="" action="/addbrand" method="post">
+                    <label for="brand_name">Brand Name</label>
+                    <input type="brand_name" name="brand_name" value="">
+                    <button class="btn" type="submit" name="button">Add brand</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}
