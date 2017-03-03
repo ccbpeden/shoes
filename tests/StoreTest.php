@@ -28,5 +28,17 @@
 
             $this->assertEquals([$store_name, $id], $result);
         }
+
+        function test_SaveGetAllDeleteAllfunctions()
+        {
+            $brand_name = "Guido";
+            $id = 1;
+            $new_brand = new Brand($brand_name, $id);
+            $new_brand->save();
+
+            $result = Brand::getAll();
+
+            $this->assertEquals([$new_brand], $result);
+        }
     }
 ?>
