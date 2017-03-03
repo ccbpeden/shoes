@@ -52,5 +52,19 @@
 
             $this->assertEquals([true, false], $result);
         }
+
+        function test_SanitizeDesanitize()
+        {
+            $store_name = "Bob's Discount Shoes & More Emporium";
+            $new_store = new Store($store_name);
+            $new_store->sanitize();
+            $result1 = $new_store->getStoreName();
+
+            $new_store->desanitize();
+            $result2 = $new_store->getStoreName();
+            $result = array($result1, $result2);
+
+            $this->assertEquals(["Bob\'s Discount Shoes &amp; More Emporium","Bob's Discount Shoes & More Emporium"], $result);
+        }
     }
 ?>
