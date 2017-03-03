@@ -19,11 +19,11 @@ A program that allows a hypothetical shoe store chain magnate to keep track of r
 | program successfully desanitizes text upon extraction from DB |  "G&amp;ido\'$" | "G&ido'$" | input contains both irregular characters and quotes |
 | Program able to find singular instances of class objects by id | instantiate 2 brands, $result = Brand::findById($brand1->getId()) | $result = $brand1 | searching for first brand ensures that return brand isn't merely returning the last brand on list |
 | Program able to find singular instances of class objects by name | instantiate 2 brands, $result = Brand::findByName($brand2->getId()) | $result = $brand2 | searching for 2nd brand ensures that return brand isn't merely returning last brand on list |
+| Program able to update store information | $new_name = "Exquisite Footwear"; $store->update($new_name); | $result = $store->getStoreName(), $result = "exquisite Footwear"
 
-| Program successfully creates relationships between brands and stores in join table |
-| Program able to find and display all stores where a brand of shoes is carried |  |  |
+| Program successfully creates relationships between brands and stores in join table | 3 brands, 1 store $this->addBrand($brand1_id) $this->addBrand($brand3_id), $result = $this->getBrands() | [$brand1, $brand3] | first and 3rd brands to ensure that not all brands are getting autopushed to brands_stores
 | Program able to find and display all brands of shoes in a particular store | |  |
-| Program able to update store information
+| Program able to find and display all stores where a brand of shoes is carried |  |  |
 | Program is able to delete stores individually and collectively
 
 | Program successfully deletes store-brand relationships from join table when a store is deleted

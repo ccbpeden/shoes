@@ -117,8 +117,29 @@
             if($valid)
             {
                 $this->setStoreName($new_store_name);
+                $this->sanitize();
                 $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$new_store_name}' WHERE id = {$this->getId()};");
             }
+        }
+
+        function addBrand($input_brand_id)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id) VALUES ({$input_brand_id}, {$this->getId()});");
+        }
+
+        function getBrands()
+        {
+            $returned_brands = $GLOBALS['DB']->query("SELECT brands.* FROM stores JOIN brands_stores ON (stores.id = brands_stores.store_id) JOIN brands ON (brands.id = brands_stores.brand_id) WHERE stores.id = {$this->getId()}");
+            $output_brands = array();
+            foreach ($returned_brands as $brand)
+            {
+                $brand_name = $brand['brand_name'];
+                $brand_id = $brand['id'];
+                $new_brand = new Brand($brand_name, $brand_id);
+                $new_brand->desanitize();
+                array_push($output_brands, $new_brand);
+            }
+            return $output_brands;
         }
     }
 ?>
