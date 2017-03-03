@@ -13,8 +13,8 @@
     {
         protected function tearDown()
         {
-        // Brand::deleteAll();
-        // Store::deleteAll();
+        Brand::deleteAll();
+        Store::deleteAll();
         // Brand::deletefromJoinTable();
         }
 
@@ -31,14 +31,26 @@
 
         function test_SaveGetAllDeleteAllfunctions()
         {
-            $brand_name = "Guido";
+            $store_name = "Shoebox";
             $id = 1;
-            $new_brand = new Brand($brand_name, $id);
-            $new_brand->save();
+            $new_store = new Store($store_name, $id);
+            $new_store->save();
 
-            $result = Brand::getAll();
+            $result = Store::getAll();
 
-            $this->assertEquals([$new_brand], $result);
+            $this->assertEquals([$new_store], $result);
+        }
+
+        function test_InputValidator()
+        {
+            $store_name1 = "Shoebox";
+            $store_name2 = "";
+
+            $result1 = Store::validate($store_name1);
+            $result2 = Store::validate($store_name2);
+            $result = array($result1, $result2);
+
+            $this->assertEquals([true, false], $result);
         }
     }
 ?>

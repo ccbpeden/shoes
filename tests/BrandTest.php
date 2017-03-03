@@ -15,7 +15,7 @@
         protected function tearDown()
         {
         Brand::deleteAll();
-        // Store::deleteAll();
+        Store::deleteAll();
         // Brand::deletefromJoinTable();
         }
 
