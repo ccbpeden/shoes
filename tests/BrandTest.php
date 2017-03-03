@@ -96,5 +96,29 @@
 
             $this->assertEquals($brand2, $result);
         }
+
+        function test_addStoreGetStores()
+        {
+            $brand_name1 = "Guido";
+            $brand1 = new Brand($brand_name1);
+            $brand1->save();
+            $store_name1 = "Discount Shoes";
+            $store1 = new Store($store_name1);
+            $store1->save();
+            $store1_id = $store1->getId();
+            $store_name2 = "Exquisite Footwear";
+            $store2 = new Store($store_name2);
+            $store2->save();
+            $store_name3 = "Arreeyaie";
+            $store3 = new Store($store_name3);
+            $store3->save();
+            $store3_id = $store3->getId();
+
+            $brand1->addStore($store1_id);
+            $brand1->addStore($store3_id);
+            $result = $brand1->getStores();
+
+            $this->assertEquals([$store1, $store3], $result);
+        }
     }
 ?>
