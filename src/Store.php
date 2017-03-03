@@ -111,5 +111,14 @@
             }
         }
 
+        function update($new_store_name)
+        {
+            $valid = Store::validate($new_store_name);
+            if($valid)
+            {
+                $this->setStoreName($new_store_name);
+                $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$new_store_name}' WHERE id = {$this->getId()};");
+            }
+        }
     }
 ?>

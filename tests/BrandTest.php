@@ -58,14 +58,13 @@
         {
             $brand_name = "G&ido'$";
             $new_brand = new Brand($brand_name);
-            $new_brand->sanitize();
+            $new_brand->save();
             $result1 = $new_brand->getBrandName();
 
-            $new_brand->desanitize();
-            $result2 = $new_brand->getBrandName();
-            $result = array($result1, $result2);
+            $stored_brand = Brand::getAll();
+            $result2 = $stored_brand[0]->getBrandName();
 
-            $this->assertEquals(["G&amp;ido\'$","G&ido'$"], $result);
+            $this->assertEquals(["G&ido'$", "G&amp;ido\'$"], [$result2, $result1]);
         }
 
         function test_findById()
@@ -96,7 +95,6 @@
             $result = Brand::findByName($search_name);
 
             $this->assertEquals($brand2, $result);
-
         }
     }
 ?>

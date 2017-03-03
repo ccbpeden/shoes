@@ -55,16 +55,15 @@
 
         function test_SanitizeDesanitize()
         {
-            $store_name = "Bob's Discount Shoes & More Emporium";
+            $store_name = "Bob's Discount Shoes & More";
             $new_store = new Store($store_name);
-            $new_store->sanitize();
+            $new_store->save();
             $result1 = $new_store->getStoreName();
 
-            $new_store->desanitize();
-            $result2 = $new_store->getStoreName();
-            $result = array($result1, $result2);
+            $stored_store = Store::getAll();
+            $result2 = $stored_store[0]->getStoreName();
 
-            $this->assertEquals(["Bob\'s Discount Shoes &amp; More Emporium","Bob's Discount Shoes & More Emporium"], $result);
+            $this->assertEquals(["Bob\'s Discount Shoes &amp; More", "Bob's Discount Shoes & More"], [$result1, $result2]);
         }
 
         function test_findById()
@@ -95,7 +94,19 @@
             $result = Store::findByName($search_name);
 
             $this->assertEquals($store2, $result);
+        }
 
+        function test_update()
+        {
+            $store_name1 = "Discount Shoes";
+            $store1 = new Store($store_name1);
+            $store1->save();
+            $store_name2 = "Exquisite Footwear";
+
+            $store1->update($store_name2);
+            $result = $store1->getStoreName();
+
+            $this->assertEquals($store_name2, $result);
         }
     }
 ?>
