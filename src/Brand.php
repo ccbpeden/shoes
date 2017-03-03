@@ -6,13 +6,8 @@
 
         function __construct($brand_name, $id = null)
         {
-            $valid = Brand::validate($brand_name);
-            if ($valid)
-            {
                 $this->setBrandName($brand_name);
                 $this->setId($id);
-            }
-            return $valid;
         }
 
         function getBrandName()
@@ -22,12 +17,7 @@
 
         function setBrandName($brand_name)
         {
-            $valid = Brand::validate($brand_name);
-            if ($valid)
-            {
                 $this->brand_name = $brand_name;
-            }
-            return $valid;
         }
 
         function getId()
@@ -70,7 +60,7 @@
         static function validate($input)
         {
             $valid = false;
-            if($input)
+            if(!empty($input))
             {
                 $valid = true;
             }

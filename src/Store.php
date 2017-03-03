@@ -6,13 +6,8 @@
 
         function __construct($store_name, $id = null)
         {
-            $valid = Store::validate($store_name);
-            if ($valid)
-            {
-                $this->setStoreName($store_name);
-                $this->setId($id);
-            }
-            return $valid;
+            $this->setStoreName($store_name);
+            $this->setId($id);
         }
 
         function getStoreName()
@@ -22,12 +17,7 @@
 
         function setStoreName($store_name)
         {
-            $valid = Store::validate($store_name);
-            if ($valid)
-            {
-                $this->store_name = $store_name;
-            }
-            return $valid;
+            $this->store_name = $store_name;
         }
 
         function getId()
@@ -70,7 +60,7 @@
         static function validate($input)
         {
             $valid = false;
-            if($input)
+            if(!empty($input))
             {
                 $valid = true;
             }
@@ -115,13 +105,9 @@
 
         function update($new_store_name)
         {
-            $valid = Store::validate($new_store_name);
-            if($valid)
-            {
-                $this->setStoreName($new_store_name);
-                $this->sanitize();
-                $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$new_store_name}' WHERE id = {$this->getId()};");
-            }
+            $this->setStoreName($new_store_name);
+            $this->sanitize();
+            $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$new_store_name}' WHERE id = {$this->getId()};");
         }
 
         function addBrand($input_brand_id)

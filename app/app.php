@@ -36,9 +36,14 @@
 
     $app->post("/addstore", function () use ($app) {
         $store_name = $_POST['store_name'];
+        $is_valid = Store::validate($store_name);
+        if($is_valid){
         $new_store = new Store($store_name);
-        $success = $new_store->save();
-        return $app->redirect("/stores");
+        $new_store->save();
+            return $app->redirect("/stores");
+        } else {
+            return $app['twig']->render('fail.html.twig');
+        }
     });
 
     $app->get("/brands", function () use ($app) {
@@ -48,9 +53,14 @@
 
     $app->post("/addbrand", function () use ($app) {
         $brand_name = $_POST['brand_name'];
-        $new_brand = new Brand($brand_name);
-        $success = $new_brand->save();
-        return $app->redirect("/brands");
+        $is_valid = Brand::validate($brand_name);
+        if($is_valid){
+            $new_brand = new Brand($brand_name);
+            $new_brand->save();
+            return $app->redirect("/brands");
+        } else {
+            return $app['twig']->render('fail.html.twig');
+        }
     });
 
 
