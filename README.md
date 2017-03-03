@@ -11,15 +11,18 @@ A program that allows a hypothetical shoe store chain magnate to keep track of r
 |Behavior|Input|Output|Justification|
 |--------|-----|------|-------|
 | Program successfully instantiates Class Objects, getters work correctly | $new_brand->getBrandName() | "Guido" | A property must be part of a successfully instantiated object to be gotten by a getter.
-| Program successfully validates Input before instantiation |  |  | because default validation state set to false, validation will only set to true if conditions passed.
+| program successfully saves object data to sql database | $new_brand->save(); $id = $new_brand->getId(); |  $id = 142 | because an id is not provided locally, any actual id number is provided by the database, proving that the object has been successfully saved.
+| Program is able to delete brands collectively |Brand::deleteAll(); $result = Brand::getAll(); | $result = [] | Assuming previous code, if the deleteAll() method weren't working, a getAll() would return the previously created brand.
+| Program successfully validates Input | Brand::validate(null); Brand::validate("cake"); | false, true | because default validation state set to false, validation will only set to true if conditions passed.
+| Program validates input before instantiating |
 | program successfully sanitizes input before instantiation
-| program successfully saves object data to sql database
 | Program able to get and display both all and singular instances of class objects |  |  |
 | Program successfully creates relationships between brands and stores in join table |
 | Program able to find and display all stores where a brand of shoes is carried |  |  |
 | Program able to find and display all brands of shoes in a particular store | |  |
 | Program able to update store information
 | Program is able to delete stores individually and collectively
+
 | Program successfully deletes store-brand relationships from join table when a store is deleted
 |
 
