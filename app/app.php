@@ -46,6 +46,25 @@
         }
     });
 
+    $app->get("/store/{id}", function ($id) use ($app){
+        $store = Store::findById($id);
+        $carried_brands = $store->getBrands();
+        $all_brands = Brand::getAll();
+        return $app['twig']->render('store.html.twig', array('store'=>$store,'carried'=>$carried_brands, 'allbrands'=>$all_brands));
+    });
+
+    $app->post("/addbrandtostore", function () use ($app){
+        $store = Store::findById($_POST['store_id']);
+        $store->addbrand($_POST['brand_id']);
+        return $app->redirect("/stores");
+    });
+
+    $app->patch("/updatestore", function() use ($app){
+        $store = Store::findById($_POST['id']);
+        $store->update($_POST['store_name']);
+        return $app->redirect("/stores");
+    });
+
     $app->get("/brands", function () use ($app) {
         $all_brands = Brand::getAll();
         return $app['twig']->render('brands.html.twig', array('brands'=>$all_brands));
