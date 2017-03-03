@@ -67,5 +67,21 @@
 
             $this->assertEquals(["G&amp;ido\'$","G&ido'$"], $result);
         }
+
+        function test_findById()
+        {
+            $brand_name1 = "Guido";
+            $brand1 = new Brand($brand_name1);
+            $brand1->save();
+            $brand_name2 = "Abliblas";
+            $brand2 = new Brand($brand_name2);
+            $brand2->save();
+            $search_id = $brand1->getId();
+
+            $result = Brand::findById($search_id);
+
+            $this->assertEquals($brand1, $result);
+
+        }
     }
 ?>

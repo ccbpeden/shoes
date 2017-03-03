@@ -84,5 +84,18 @@
         {
             $this->brand_name = htmlspecialchars_decode(stripslashes($this->brand_name));
         }
+
+        static function findById($id)
+        {
+            $all_brands = Brand::getAll();
+            foreach($all_brands as $brand)
+            {
+                $brand_id = $brand->getId();
+                if($brand_id == $id)
+                {
+                    return $brand;
+                }
+            }
+        }
     }
 ?>
