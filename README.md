@@ -17,7 +17,9 @@ A program that allows a hypothetical shoe store chain magnate to keep track of r
 | Program validates input before instantiating | $new_brand = new Brand(""); $new_brand->getBrandName() | error | unable to instantiate because invalid input |
 | program successfully sanitizes input before saving to DB | "G&ido'$" | "G&amp;ido\'$" | input contains both irregular characters and quotes |
 | program successfully desanitizes text upon extraction from DB |  "G&amp;ido\'$" | "G&ido'$" | input contains both irregular characters and quotes |
-| Program able to find singular instances of class objects by id | $result = Brand::findById($brand1->getId()) | $result = $brand1 | 
+| Program able to find singular instances of class objects by id | instantiate 2 brands, $result = Brand::findById($brand1->getId()) | $result = $brand1 | searching for first brand ensures that return brand isn't merely returning the last brand on list |
+| Program able to find singular instances of class objects by name | instantiate 2 brands, $result = Brand::findByName($brand2->getId()) | $result = $brand2 | searching for 2nd brand ensures that return brand isn't merely returning last brand on list |
+
 | Program successfully creates relationships between brands and stores in join table |
 | Program able to find and display all stores where a brand of shoes is carried |  |  |
 | Program able to find and display all brands of shoes in a particular store | |  |
