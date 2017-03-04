@@ -65,6 +65,12 @@
         return $app->redirect("/stores");
     });
 
+    $app->delete("/delete_store", function() use ($app){
+        $store = Store::findById($_POST['id']);
+        $store->delete();
+        return $app->redirect("/stores");
+    });
+
     $app->get("/brands", function () use ($app) {
         $all_brands = Brand::getAll();
         return $app['twig']->render('brands.html.twig', array('brands'=>$all_brands));

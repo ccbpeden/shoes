@@ -43,9 +43,9 @@ CREATE TABLE brands_stores (brand_id INT, store_id INT, id serial PRIMARY KEY);
 * Download the zip file via the green button
 * Unzip the file and open the **_shoes-master_** folder
 * Open Terminal, navigate to **_shoes-master_** project folder, type **_composer install_** and hit enter
-* Navigate Terminal to the **_shoes/web_** folder and set up a server by typing **_php -S localhost:8888_**
+* Navigate Terminal to the **_shoes/web_** folder and set up a server by typing **_php -S localhost:8000_**
 * Activate Mamp and Start Servers
-* In a web browser, browse to localhost:888/phpmyadmin.
+* In a web browser, browse to localhost:8888/phpmyadmin.
 * Click the import tab in the phpmyadmin gui and select the zipped database included in the project folder.
 * The application should now load and be ready to use!
 * Type **_localhost:8888_** into your web browser
