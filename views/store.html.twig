@@ -3,46 +3,42 @@
     <h2>Store: {{store.getStoreName}} </h2>
     <div class="row">
         <div class="col-md-6">
-            <div class="jumbotron">
-                {% if carried is not empty %}
+            {% if carried is not empty %}
                 <h3>Brands currently carried in this store:</h3>
                 <ul>
                     {% for brand in carried %}
                     <li>{{brand.getBrandName}}</li>
                     {% endfor %}
                 </ul>
-                {% else %}
+            {% else %}
                 <h3>This store currently carries no brands at all!</h3>
-                {% endif %}
-                </form>
-            </div>
+            {% endif %}
         </div>
         <div class="col-md-6">
-            {% if allbrands is not empty %}
-            <h2>Add an existing brand to this store:</h2>
-                <form class="" action="/add_brand_to_store" method="post">
+            <div class="well">
+                {% if allbrands is not empty %}
+                <h2>Add an existing brand to this store:</h2>
+                <form  action="/add_brand_to_store" method="post">
                     <input type="hidden" name="store_id" value="{{store.getId}}">
-                    <select class="" name="brand_id" id="brand_id">
+                    <select class="form-control" class="" name="brand_id" id="brand_id">
                         {% for brand in allbrands %}
-                        <option value={{brand.getId}}>{{brand.getBrandName}}</option>
+                            <option value={{brand.getId}}>{{brand.getBrandName}}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit" name="button">Add Brand</button>
+                    <button class="btn" type="submit" name="button">Add Brand</button>
                 </form>
-            {% endif %}
-
-            <div class="jumbotron">
+                {% endif %}
+            </div>
+            <div class="well">
                 <h3>Change this store's name:</h3>
-                <form class="" action="/update_store" method="post">
+                <form action="/update_store" method="post">
                     <input type="hidden" name="_method" value="patch">
                     <input type="hidden" name="id" value="{{store.getId}}">
                     <label for="store_name">Store Name</label>
-                    <input type="store_name" name="store_name" value="{{store.getStoreName}}">
+                    <input class="form-control" type="store_name" name="store_name" value="{{store.getStoreName}}">
                     <button class="btn" type="submit" name="button">Change Name</button>
                 </form>
-
             </div>
         </div>
     </div>
-
 {%endblock%}

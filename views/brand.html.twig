@@ -3,32 +3,30 @@
     <h2>Brand: {{brand.getBrandName}} </h2>
     <div class="row">
         <div class="col-md-6">
-            <div class="jumbotron">
-                {% if carrying_stores is not empty %}
+            {% if carrying_stores is not empty %}
                 <h3>Stores currently carrying this brand:</h3>
                 <ul>
                     {% for store in carrying_stores %}
                     <li>{{store.getStoreName}}</li>
                     {% endfor %}
                 </ul>
-                {% else %}
+            {% else %}
                 <h3>This brand is currently not carried in any of your stores!</h3>
-                {% endif %}
-                </form>
-            </div>
+            {% endif %}
+            </form>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 well">
             {% if all_stores is not empty %}
-            <h2>Add this brand to an existing store:</h2>
-                <form class="" action="/add_store_to_brand" method="post">
-                    <input type="hidden" name="brand_id" value="{{brand.getId}}">
-                    <select class="" name="store_id" id="store_id">
-                        {% for store in all_stores %}
-                        <option value={{store.getId}}>{{store.getStoreName}}</option>
-                        {% endfor %}
-                    </select>
-                    <button type="submit" name="button">Add Store</button>
-                </form>
+                <h2>Add this brand to an existing store:</h2>
+                    <form  action="/add_store_to_brand" method="post">
+                        <input class="form-control" type="hidden" name="brand_id" value="{{brand.getId}}">
+                        <select class="" name="store_id" id="store_id">
+                            {% for store in all_stores %}
+                                <option         value={{store.getId}}>{{store.getStoreName}}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn" type="submit" name="button">Add Store</button>
+                    </form>
             {% endif %}
             </div>
         </div>

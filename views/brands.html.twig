@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-6">
             {% if brands is not empty %}
-            <h2>Select a Current Carried Brands:</h2>
+            <h2>Select from carried Brands:</h2>
             <ul>
                 {% for brand in brands %}
                 <li><h4><a href="/brand/{{brand.getId}}">{{brand.getBrandName}}</a></h4><br></li>
@@ -14,11 +14,11 @@
             {% endif %}
         </div>
         <div class="col-md-6">
-            <div class="jumbotron">
+            <div class="well">
                 <h3>Add a Brand</h3>
                 <form class="" action="/add_brand" method="post">
                     <label for="brand_name">Brand Name</label>
-                    <input type="brand_name" name="brand_name" value="">
+                    <input class="form-control" type="text" name="brand_name" value="">
                     <button class="btn" type="submit" name="button">Add brand</button>
                 </form>
             </div>
