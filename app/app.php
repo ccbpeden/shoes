@@ -34,7 +34,7 @@
         return $app['twig']->render('stores.html.twig', array('stores'=>$all_stores));
     });
 
-    $app->post("/addstore", function () use ($app) {
+    $app->post("/add_store", function () use ($app) {
         $store_name = $_POST['store_name'];
         $is_valid = Store::validate($store_name);
         if($is_valid){
@@ -53,13 +53,13 @@
         return $app['twig']->render('store.html.twig', array('store'=>$store,'carried'=>$carried_brands, 'allbrands'=>$all_brands));
     });
 
-    $app->post("/addbrandtostore", function () use ($app){
+    $app->post("/add_brand_to_store", function () use ($app){
         $store = Store::findById($_POST['store_id']);
         $store->addbrand($_POST['brand_id']);
         return $app->redirect("/stores");
     });
 
-    $app->patch("/updatestore", function() use ($app){
+    $app->patch("/update_store", function() use ($app){
         $store = Store::findById($_POST['id']);
         $store->update($_POST['store_name']);
         return $app->redirect("/stores");
@@ -82,6 +82,19 @@
         }
     });
 
+    $app->get("/brand/{id}", function ($id) use ($app){
+        $brand = Brand::findById($id);
+        $carrying_stores = $brand->getStores();
+        $all_stores = Store::getAll();
+        return $app['twig']->render('brand.html.twig', array('brand'=>$brand,'carrying_stores'=>$carrying_stores, 'all_stores'=>$all_stores));
+    });
+
+
+    $app->post("/add_store_to_brand", function () use ($app){
+        $brand = Brand::findById($_POST['brand_id']);
+        $brand->addStore($_POST['store_id']);
+        return $app->redirect("/brands");
+    });
 
     return $app;
 ?>

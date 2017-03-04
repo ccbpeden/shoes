@@ -20,7 +20,7 @@
         <div class="col-md-6">
             {% if allbrands is not empty %}
             <h2>Add an existing brand to this store:</h2>
-                <form class="" action="/addbrandtostore" method="post">
+                <form class="" action="/add_brand_to_store" method="post">
                     <input type="hidden" name="store_id" value="{{store.getId}}">
                     <select class="" name="brand_id" id="brand_id">
                         {% for brand in allbrands %}
@@ -33,7 +33,7 @@
 
             <div class="jumbotron">
                 <h3>Change this store's name:</h3>
-                <form class="" action="/updatestore" method="post">
+                <form class="" action="/update_store" method="post">
                     <input type="hidden" name="_method" value="patch">
                     <input type="hidden" name="id" value="{{store.getId}}">
                     <label for="store_name">Store Name</label>
